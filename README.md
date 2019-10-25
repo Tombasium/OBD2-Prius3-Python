@@ -14,6 +14,8 @@ The only useful source so far found has been a document puclished by the Univers
 
 This group acquired CAN bus data from a 2010 Toyota Camry (US model) which seems as good a place as any to start looking for information on a 2013 Prius' CAN bus architecture. 
 
+## Methodology
+
 By reading this document we have been able to verify that the most effective method to discern what data relates to what information is simply to systematically compare values gleaned from the CANbus data dump against expected values according to information known. 
 
 
@@ -27,3 +29,5 @@ Steering wheel position can be found by watching for the turn at the end.
 
 
 Using a similar process we intend to carry out several separate tests to gather data, initially a short drive was taken in normal driving conditions in order to get a feel for the data and attempt the first set of deductions regarding what data relates to what information. 
+
+Subsequent 
