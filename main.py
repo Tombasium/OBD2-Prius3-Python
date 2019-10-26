@@ -11,15 +11,28 @@ import csv
 def convert_to_csv(file_name = "C:/Users/TomLap/CanTest/candump-2019-10-04_125707.log"):
     csv_writer = csv.writer
     with open(file_name, "r", newline = "\n") as source:
-        with open("CANdata.csv", "wb") as output:
-            csv_writer = csv.writer(output)
+        with open("CANdata.csv", "w") as output:
+            csv_writer = csv.writer(output, lineterminator="\n")
             for line in source:
-                output_line = 
+                
+                output_line = prepare_line_for_csv(line)
+                csv_writer.writerow(list(output_line))
+                #print(output_line)
 
 def prepare_line_for_csv(line):
     data = line.split(" ")
-    date_time = epoch_to_timestamp(data[0])
-    
+#    date_time = [epoch_to_timestamp(data[0])]
+    if len(data) == 3:
+        date_time = [float(data[0][1:-1])]
+        code = [get_line_code(data[2])]
+        data = parse_line_data_to_list(data[2])
+        
+        output = date_time + code + data
+        
+        return output
+
+    else:
+        return
 
 def convert_and_strip_file(file_name = "C:/Users/TomLap/CanTest/candump-2019-10-04_125707.log"):
     with open(file_name, "r", newline = "\n") as source:
@@ -56,8 +69,41 @@ def hex_byte_to_dec(byte):
     value = (multiplier * 16) + addition
     
     return value
+
+def hex_byte_to_dec_11bit(value):
+    
+    byte_1 = hex_to_dec(value[0])
+    multiplier = hex_to_dec(value[1])
+    addition = hex_to_dec(value[2])
+    
+    value = (byte_1 * 256) + (multiplier * 16) + addition
+    
+    return value
+
+
+def get_line_code(line, style = 'dec'):
+    if style == 'dec':
+        output = (hex_byte_to_dec_11bit(line[:3]))
+
+    if style == 'hex':
+        output = (line[:3])
+
+    return output
+    
+    
+def parse_line_data_to_list(line, style = 'dec'):
+    output = []
+    if style == 'dec':
+        for i in range(4, len(line) - 2, 2):
+            output.append(hex_byte_to_dec(line[i:i+2]))
+
+    if style == 'hex':
+        for i in range(4, len(line) - 2, 2):
+            output.append(line[i:i+2])
+
+    return output
             
-def parse_line_data(line, style = 'dec'):
+def parse_line_data_to_str(line, style = 'dec'):
     output = ''
     if style == 'dec':
         for i in range(4, len(line) - 2, 2):
