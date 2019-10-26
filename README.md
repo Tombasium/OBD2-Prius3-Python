@@ -28,6 +28,21 @@ Brake pedal pressure and ABS engagement should be able to be detected by looking
 Steering wheel position can be found by watching for the turn at the end. 
 
 
-Using a similar process we intend to carry out several separate tests to gather data, initially a short drive was taken in normal driving conditions in order to get a feel for the data and attempt the first set of deductions regarding what data relates to what information. 
+Using a similar process we intend to carry out several separate tests to gather data.
 
-Subsequent 
+Initially a short drive was taken in normal driving conditions in order to get a feel for the data and attempt the first set of deductions regarding what data relates to what information. 
+
+During this data capture session we found no fewer than 
+
+From this we should be able to discover which fields in the received data contain which type of data from the following types:
+
+* Continuous (ish) data such as speed / acceleration - This may be positive only (speed) or pos/neg (steering wheel position) 
+
+* Discrete data such as button states - binary (power on / off) and multi-state (windscreen wiper settings)
+
+* Static (such as vehicle chassis number or VIN)
+
+* Empty
+
+
+
