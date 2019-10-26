@@ -30,6 +30,8 @@ Steering wheel position can be found by watching for the turn at the end.
 
 Using a similar process we intend to carry out several separate tests to gather data.
 
+## First Run
+
 Initially a short drive was taken in normal driving conditions in order to get a feel for the data and attempt the first set of deductions regarding what data relates to what information. 
 
 During this data capture session we found no fewer than 
@@ -45,4 +47,34 @@ From this we should be able to discover which fields in the received data contai
 * Empty
 
 
+By using the method 
 
+```range_data_to_csv()``` 
+
+in 
+
+```stripAndDetect.py```
+
+we are able to produce a .csv file for ease of viewing. 
+
+This method takes the raw data from ```candump-2019-10-04_125707.log``` and outputs a .csv with the following headings:
+
+Code - the address for the message
+Count - the number of messages with this destination that appear
+Byte 1 - The number of different values observed for the first byte
+Byte 2 - the number of different values observed for the second byte
+Byte 3 ...
+
+
+The idea is that by seeing what range values can take in any given byte position we can start to determine what each message address is most likely to be describing. 
+
+
+To illustrate, we look at the output where we notice a few things. 
+
+First, some bytes have a 0 values - in other words no values at all for that byte. This just indicates that the full length of the data package was shorter than the usual 8 bytes. 
+
+Second, several message addresses have just 1 possible value for certain bytes. This could indicate either that the data never changes, being perhaps a fixed message that is sent, or that the data position indicates a switch that has not had its position changed over the course of the data collection period. 
+
+This second distinction will be targeted in a later test, when we test various switches in turn over a perios in a known sequence.
+
+Last, there are values which have full 255 ranges of values for the byte. These are likely to be the continuous data types described above. What is worth noting is that the values may well extend over more than one byte. Speed, for example, is likely to be measures in fractions of kph or mph, and as such will need more than 255 possible values. Further experimentation will be needed to fix these values. 
