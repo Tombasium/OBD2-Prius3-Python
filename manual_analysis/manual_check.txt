@@ -1,0 +1,15 @@
+020		69553		0 0 7 1 0 0 47 (all)
+024		69551		Variable values (Hi/Lo; some continuous)
+025		69539		Variable values (Hi/Lo; some continuous, much repetition)
+0AA		69553		Variable values, repetition
+0B4		34777		Some variable, much Hi/Lo
+0B6		17388		4 byte, 14 quantisation levels in 1 variable, rest Hi/Lo one all 0
+127		51406		some variable, some static, some Hi/Lo
+1AA		17389		all static
+1C4		35763		14 quant levels in byte 1
+224		34777		Some graphic, some switch
+230		34775		Some graphs, some switch. Rising pattern then sharp drop 
+235		34777		Static 6 byte
+245		35761		Interesting, graphable
+247		35761		Interesting, graphable
+260		41581		
